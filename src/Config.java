@@ -15,8 +15,8 @@ public class Config {
 	public int minStorage = 100;
 	public int maxStorage = 150;
 	
-	public int minFile = 5;
-	public int maxFile = 15;
+	public int minFile = 1;
+	public int maxFile = 10;
 			
 	public int minAccess = 500;
 	public int maxAccess = 1500;
