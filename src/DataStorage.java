@@ -5,6 +5,8 @@ public class DataStorage extends Thread {
 	private Logger logger = Logger.getInstance();
 	private Map<Integer, File> files = new HashMap<>();
 	public List<Request> requests = new ArrayList<>();
+	
+	private StorageScheduler scheduler = new StorageScheduler(requests);
 
 	private int totalSpace;
 	private int usedSpace;
@@ -63,11 +65,7 @@ public class DataStorage extends Thread {
 	}
 	
 	public void addRequest(Request request) {
-		// scheduler here!
-		synchronized (requests) {
-			requests.add(request);
-			requests.notifyAll();
-		}
+		scheduler.putRequest(request);
 	}
 	
 	public void processRequest(Request request) {
