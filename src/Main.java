@@ -13,7 +13,7 @@ public class Main {
 		new Thread(monitor).start();
 		
 		int testSize = system.config.safeFilesPerStorage * system.config.storages;
-		testSize = (int) (testSize * 1.5);
+		//testSize = (int) (testSize * 1.5);
 		
 		for(int i=0; i<testSize; ++i)
 			system.makeRequest(new Request("new", 0));
