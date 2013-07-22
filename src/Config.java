@@ -21,8 +21,11 @@ public class Config {
 	public int minAccess = 500;
 	public int maxAccess = 1500;
 			
-	public int safeFilesPerStorage = minStorage / maxFile;
 	public int storages = 20;
+	
+	public int safeFilesPerStorage() {
+		return minStorage / maxFile;
+	}
 			
 	public int nextStorageSize() {
 		return rand(minStorage, maxStorage) * baseSize;

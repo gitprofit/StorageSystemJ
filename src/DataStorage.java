@@ -3,7 +3,7 @@ import java.util.*;
 public class DataStorage extends Thread {
 
 	private Logger logger = Logger.getInstance();
-	private Map<Integer, File> files = new HashMap<>();
+	//private Map<Integer, File> files = new HashMap<>();
 	public List<Request> requests = new ArrayList<>();
 	
 	private StorageScheduler scheduler = new StorageScheduler(requests);
@@ -35,11 +35,15 @@ public class DataStorage extends Thread {
 		freeSpace += size;
 		usedSpace -= size;
 	}
+	
+	private GlobalList times;
 
 	public DataStorage(int storageSize) {
 		totalSpace = storageSize;
 		usedSpace = 0;
 		freeSpace = storageSize;
+		
+		times = GlobalList.get();
 		
 		currUsed = 0;
 	}
@@ -65,10 +69,13 @@ public class DataStorage extends Thread {
 	}
 	
 	public void addRequest(Request request) {
+		request.createTime = System.currentTimeMillis();
 		scheduler.putRequest(request);
 	}
 	
 	public void processRequest(Request request) {
+		
+		times.put(System.currentTimeMillis() - request.createTime);
 		
 		// server-monitor gui stuff
 		if(request.type == "new")
@@ -76,6 +83,8 @@ public class DataStorage extends Thread {
 		
 		if(request.type == "del")
 			currUsed -= request.metadata.size;
+		
+		request.metadata.lastAccess = new Date();
 		
 		logger.log("request processing: " + request.type + ", file: " + request.ID);
 		try { Thread.sleep(request.accessTime); }

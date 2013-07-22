@@ -6,6 +6,8 @@ public class Request {
 	public long accessTime;
 	public FileMetadata metadata;
 	
+	public long createTime;
+	
 	public Request(String type, int ID) {
 		this.type = type;
 		this.ID = ID;
