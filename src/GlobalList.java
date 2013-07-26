@@ -21,6 +21,13 @@ public class GlobalList {
 		return list.size();
 	}
 	
+	public void dump() {
+		for(double d : list) {
+			System.out.print(d + ", ");
+			System.out.println("");
+		}
+	}
+	
 	public synchronized void clear() {
 		list.clear();
 	}

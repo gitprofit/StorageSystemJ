@@ -11,8 +11,6 @@ public class StorageScheduler {
 	public void putRequest(Request request) {
 		
 		synchronized(requests) {
-			requests.add(request);
-			requests.notifyAll();
 			
 			int i=0;
 			for(i=0; i<requests.size(); ++i) {
@@ -25,7 +23,7 @@ public class StorageScheduler {
 
 				int sizeDiff = request.metadata.size - curr.metadata.size;
 				
-				if(Math.abs(sizeDiff) < 0.2*request.metadata.size) {
+				if(Math.abs(sizeDiff) < 0.2*Math.min(request.metadata.size, curr.metadata.size)) {
 					// sizeDiff zaniedbywalny
 					
 					// older first
@@ -40,7 +38,9 @@ public class StorageScheduler {
 				}
 			}
 			
+			request.createTime = System.currentTimeMillis();
 			requests.add(i, request);
+			requests.notifyAll();
 		}
 	}
 }

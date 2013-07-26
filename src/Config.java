@@ -18,8 +18,8 @@ public class Config {
 	public int minFile = 1;
 	public int maxFile = 10;
 			
-	public int minAccess = 500;
-	public int maxAccess = 1500;
+	public int minAccess = 128;
+	public int maxAccess = 1024;
 			
 	public int storages = 20;
 	
@@ -28,7 +28,8 @@ public class Config {
 	}
 			
 	public int nextStorageSize() {
-		return rand(minStorage, maxStorage) * baseSize;
+		//return rand(minStorage, maxStorage) * baseSize;
+		return (int) (0.5 * (maxStorage-minStorage) * baseSize);
 	}
 	
 	public int nextFileSize() {

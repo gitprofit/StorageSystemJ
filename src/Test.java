@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Random;
 
 
@@ -7,9 +8,9 @@ public class Test {
 	
 	public void run() {
 		
-		StorageSystem system = new StorageSystem();
+		Config.getInstance().storages = 160;
 		
-		system.config.storages = 20;
+		StorageSystem system = new StorageSystem();
 		
 		system.run();
 		
@@ -17,10 +18,19 @@ public class Test {
 		new Thread(monitor).start();
 		
 		int testSize = system.config.safeFilesPerStorage() * system.config.storages;
-		//testSize = (int) (testSize * 1.5);
+		testSize = (int) (testSize * 2.0);
 		
-		for(int i=0; i<testSize; ++i)
+		for(int i=0; i<testSize; ++i) {
 			system.makeRequest(new Request("new", 0));
+			
+			try { Thread.sleep(30); }
+			catch (InterruptedException e) { }
+		}
+		
+		try { Thread.sleep(1000); }
+		catch (InterruptedException e) { }
+		
+		GlobalList.get().clear();
 
 		for(int i=0; i<testSize; ++i) {
 			
@@ -45,14 +55,23 @@ public class Test {
 		
 		GlobalList gl = GlobalList.get();
 		
-		while(gl.size() != 4*testSize) {
-			try { Thread.sleep(2000); }
-			catch (InterruptedException e) { e.printStackTrace(); }
+		//while(gl.size() != 4*testSize) {
+			//try { Thread.sleep(2000); }
+			//catch (InterruptedException e) { e.printStackTrace(); }
+			
+			try {
+				int x = System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			gl.dump();
 			
 			System.out.println("gl.size() = " + gl.size());
 			System.out.println(" testSize = " + testSize);
-		}
+		//}
 		
-		System.out.println("avg sec in queue: " + GlobalList.get().avg()/1000.0);
+		System.out.println("{ " + Config.getInstance().storages + ", " + GlobalList.get().avg()/1000.0 + " }");
 	}
 }

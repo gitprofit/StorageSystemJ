@@ -108,13 +108,14 @@ public class ServerMonitor implements Runnable {
 	private void updateGUI() {
 		for (StorageInfo si : storages)
 			si.update();
-
+		
+		/*
 		Queue<String> messages = Logger.getInstance().grabMessages();
 
 		while (!messages.isEmpty()) {
 			writeLog(messages.poll());
 			scrollLog();
-		}
+		}*/
 	}
 
 	private void scrollLog() {
