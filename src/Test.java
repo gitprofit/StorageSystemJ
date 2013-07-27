@@ -8,14 +8,14 @@ public class Test {
 	
 	public void run() {
 		
-		Config.getInstance().storages = 160;
+		Config.getInstance().storages = 100;
 		
 		StorageSystem system = new StorageSystem();
 		
 		system.run();
 		
-		ServerMonitor monitor = new ServerMonitor(system);
-		new Thread(monitor).start();
+		//ServerMonitor monitor = new ServerMonitor(system);
+		//new Thread(monitor).start();
 		
 		int testSize = system.config.safeFilesPerStorage() * system.config.storages;
 		testSize = (int) (testSize * 2.0);
@@ -27,8 +27,10 @@ public class Test {
 			catch (InterruptedException e) { }
 		}
 		
+		System.out.println("Fall asleep ...");
 		try { Thread.sleep(1000); }
 		catch (InterruptedException e) { }
+		System.out.println("Awake!!!");
 		
 		GlobalList.get().clear();
 
@@ -49,7 +51,7 @@ public class Test {
 				break;
 			}
 			
-			try { Thread.sleep(30); }
+			try { Thread.sleep(5); }
 			catch (InterruptedException e) { }
 		}
 		
