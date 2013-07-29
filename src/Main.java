@@ -5,6 +5,21 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		int stor = Integer.parseInt(args[0]);
+		int delta = Integer.parseInt(args[1]);
+		
+		GlobalList.get();
+		Config.getInstance();
+		Counter.getInst();
+		
+		Test test = new Test();
+		
+		System.out.print(test.run(stor, delta));
+		
+		
+		
+		
+		/*
 		GlobalList.get();
 		Config.getInstance();
 		Counter.getInst();
@@ -33,6 +48,7 @@ public class Main {
 				}
 			}
 		}
+		*/
 	}
 
 }

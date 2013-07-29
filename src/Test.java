@@ -5,7 +5,7 @@ public class Test {
 	
 	private static Random rand = new Random();
 	
-	public double run(int numOfStorages) {
+	public double run(int numOfStorages, int timeDelta) {
 		
 		Counter counter = Counter.getInst();
 		counter.zero();
@@ -69,7 +69,7 @@ public class Test {
 				break;
 			}
 			
-			try { Thread.sleep(15); }
+			try { Thread.sleep(timeDelta); }
 			catch (InterruptedException e) { }
 		}
 		
