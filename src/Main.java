@@ -20,14 +20,14 @@ public class Main {
 		for(int i=0; i<loNum; ++i) {
 			
 			for(int lo : loStorages) {
-				System.out.println("{ " + lo + ", " + test.run(lo) + " }");
+				System.out.println("{ " + lo + ", " + test.run(lo) + " },");
 				try { Thread.sleep(1000); }
 				catch (InterruptedException e) { }
 			}
 			
 			if(i<hiNum) {
 				for(int lo : hiStorages) {
-					System.out.println("{ " + lo + ", " + test.run(lo) + " }");
+					System.out.println("{ " + lo + ", " + test.run(lo) + " },");
 					try { Thread.sleep(1000); }
 					catch (InterruptedException e) { }
 				}
