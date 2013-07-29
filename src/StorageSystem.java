@@ -6,6 +6,7 @@ public class StorageSystem {
 	private Random rand = new Random();
 	
 	public Config config = Config.getInstance();
+	public Counter counter = Counter.getInst();
 	
 	private Map<Integer, FileMetadata> metadata = new HashMap<>();
 	private int indexer = 1000;
@@ -54,7 +55,10 @@ public class StorageSystem {
 		int size = config.nextFileSize();
 		DataStorage storage = preferredStorage(size);
 		
-		if(storage == null) return;
+		if(storage == null) {
+			counter.inc();
+			return;
+		}
 		
 		indexer++;
 		

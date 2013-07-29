@@ -39,3 +39,20 @@ public class GlobalList {
 		return sum/list.size();
 	}
 }
+
+class Counter {
+	
+	private static Counter instance;
+	
+	private int cnt = 0;
+	
+	public static Counter getInst() {
+		if(instance == null)
+			instance = new Counter();
+		return instance;
+	}
+	
+	public synchronized void inc() { cnt++; };
+	public synchronized int get() { return cnt; }
+	public synchronized void zero() { cnt = 0; }
+}

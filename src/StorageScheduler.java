@@ -42,7 +42,6 @@ public class StorageScheduler {
 					break;
 			}
 			
-			Logger.getInstance().log("pos: " + i);
 			request.createTime = System.currentTimeMillis();
 			requests.add(i, request);
 			requests.notifyAll();

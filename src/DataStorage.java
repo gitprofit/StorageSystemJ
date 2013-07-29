@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class DataStorage extends Thread {
+	
+	private Counter counter = Counter.getInst();
 
 	private Logger logger = Logger.getInstance();
 	//private Map<Integer, File> files = new HashMap<>();
@@ -59,7 +61,9 @@ public class DataStorage extends Thread {
 				
 				while (requests.isEmpty())
 					try { requests.wait(); }
-					catch (InterruptedException e) { e.printStackTrace(); }
+					catch (InterruptedException e) {
+						return;
+					}
 				
 				next = requests.remove(0);
 			}
@@ -90,5 +94,6 @@ public class DataStorage extends Thread {
 		try { Thread.sleep(request.accessTime); }
 		catch (InterruptedException e) { e.printStackTrace(); }
 		logger.log("done processing");
+		counter.inc();
 	}
 }

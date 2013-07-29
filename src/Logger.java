@@ -25,8 +25,8 @@ public class Logger {
 	public synchronized void log(String message) {
 		
 		message = Thread.currentThread() + " : " + message;
-		logFile.println(message);
-		logMessages.add(message);
+		//logFile.println(message);
+		//logMessages.add(message);
 	}
 	
 	public synchronized Queue<String> grabMessages() {
