@@ -19,8 +19,9 @@ public class StorageScheduler {
 				
 				Request curr = requests.get(i);
 				
-				if(curr.type == "new") continue;
-
+				//if(curr.type == "new") continue;
+				
+				/*
 				int sizeDiff = request.metadata.size - curr.metadata.size;
 				
 				if(Math.abs(sizeDiff) < 0.2*Math.min(request.metadata.size, curr.metadata.size)) {
@@ -36,8 +37,12 @@ public class StorageScheduler {
 					if(curr.metadata.size > request.metadata.size)
 						break;
 				}
+				*/
+				if(curr.metadata.size > request.metadata.size)
+					break;
 			}
 			
+			Logger.getInstance().log("pos: " + i);
 			request.createTime = System.currentTimeMillis();
 			requests.add(i, request);
 			requests.notifyAll();

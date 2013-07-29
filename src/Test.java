@@ -8,7 +8,7 @@ public class Test {
 	
 	public void run() {
 		
-		Config.getInstance().storages = 100;
+		Config.getInstance().storages = 10;
 		
 		StorageSystem system = new StorageSystem();
 		
@@ -51,7 +51,7 @@ public class Test {
 				break;
 			}
 			
-			try { Thread.sleep(5); }
+			try { Thread.sleep(15); }
 			catch (InterruptedException e) { }
 		}
 		
